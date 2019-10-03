@@ -138,16 +138,19 @@ export class CircleCloudComponent implements OnInit, AfterViewInit, OnDestroy {
     document.getElementById("cloud").ontouchmove = event => {
       this.mouse.x = event.touches[0].clientX;
       this.mouse.y = event.touches[0].clientY;
-      for (let i = 0; i < this.pCount; i++) {
-        TweenMax.to(this.particles[i].position, 2, {
-          ease: Expo.ease,
-          x:
-            this.mouse.x * this.position[0][i] +
-            this.random(-100, 100) * this.distance[i] * 10,
-          y:
-            this.mouse.y * this.position[1][i] +
-            this.random(-100, 100) * this.distance[i] * 10
-        });
+      this.block += 1;
+      if (this.block >= 7) {
+        this.block = 0;
+        for (let i = 0; i < this.pCount; i++) {
+          TweenMax.to(this.particles[i].position, this.random(2, 5), {
+            x:
+              this.mouse.x * this.random(0.5, 1.5) +
+              this.random(-100, 100) * this.distance[i] * 10,
+            y:
+              this.mouse.y * this.random(0.5, 1.5) +
+              this.random(-100, 100) * this.distance[i] * 10
+          });
+        }
       }
     };
     document.getElementById("cloud").onclick = event => {
