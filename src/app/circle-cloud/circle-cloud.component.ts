@@ -8,6 +8,7 @@ import {
 } from "@angular/core";
 import { TweenMax, Expo, Power2 } from "gsap/all";
 import * as PIXI from "pixi.js";
+import { Circ } from "gsap";
 declare var TweenMax: any;
 
 @Component({
@@ -30,11 +31,14 @@ export class CircleCloudComponent implements OnInit, AfterViewInit, OnDestroy {
 
   angle = [];
   distance = [];
+  position = [[], []];
 
   mouse = {
     x: 0,
     y: 0
   };
+
+  block = 0;
 
   orientation;
 
@@ -68,9 +72,7 @@ export class CircleCloudComponent implements OnInit, AfterViewInit, OnDestroy {
       this.random(this.app.screen.width / 2, this.app.screen.width / 2),
       this.random(this.app.screen.height / 2, this.app.screen.height / 2)
     );
-    particle.rotation = this.random(0, 1);
-    particle.anchor.set(this.random(0.1, 1));
-    const distance = this.random(0.1, 0.3);
+    particle.anchor.set(0.5, 0.5);
     return particle;
   }
 
@@ -80,6 +82,8 @@ export class CircleCloudComponent implements OnInit, AfterViewInit, OnDestroy {
       this.cloudContainer.addChild(this.particles[i]);
       this.angle.push(this.random(0.001, 0.001 * (i / 10)));
       this.distance.push(this.random(0.1, 0.3));
+      this.position[0][i] = this.random(0.5, 1.5);
+      this.position[1][i] = this.random(0.5, 1.5);
     }
     this.app.stage.addChild(this.cloudContainer);
   }
@@ -100,35 +104,6 @@ export class CircleCloudComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  createCloud() {
-    // 3
-    let i = 0;
-    for (let y = 0; y < this.settings.tmpCanvas.height; y += 6) {
-      for (let x = 0; x < this.settings.tmpCanvas.width; x += 6) {
-        if (
-          this.settings.imageData.data[
-            (y * this.settings.imageData.width + x) * 4 + 3
-          ] > 20
-        ) {
-          this.setParticleToCloud(
-            x + this.settings.widthDiff,
-            y + this.settings.heightDiff,
-            i
-          );
-          i += 1;
-        }
-      }
-    }
-  }
-
-  setParticleToCloud(x, y, num) {
-    TweenMax.to(this.particles[num].position, this.random(3, 6), {
-      ease: Expo.easeOut,
-      x,
-      y
-    });
-  }
-
   ngOnInit() {
     this.app = new PIXI.Application({
       height: window.innerHeight,
@@ -145,29 +120,32 @@ export class CircleCloudComponent implements OnInit, AfterViewInit, OnDestroy {
     document.getElementById("cloud").onmousemove = event => {
       this.mouse.x = event.clientX;
       this.mouse.y = event.clientY;
-      for (let i = 0; i < this.pCount; i++) {
-        TweenMax.to(this.particles[i].position, 3, {
-          ease: Expo.ease,
-          x:
-            this.mouse.x * this.random(0.5, 1.5) +
-            this.random(-100, 100) * this.distance[i] * 10,
-          y:
-            this.mouse.y * this.random(0.5, 1.5) +
-            this.random(-100, 100) * this.distance[i] * 10
-        });
+      this.block += 1;
+      if (this.block >= 7) {
+        this.block = 0;
+        for (let i = 0; i < this.pCount; i++) {
+          TweenMax.to(this.particles[i].position, this.random(2, 5), {
+            x:
+              this.mouse.x * this.random(0.5, 1.5) +
+              this.random(-100, 100) * this.distance[i] * 10,
+            y:
+              this.mouse.y * this.random(0.5, 1.5) +
+              this.random(-100, 100) * this.distance[i] * 10
+          });
+        }
       }
     };
     document.getElementById("cloud").ontouchmove = event => {
       this.mouse.x = event.touches[0].clientX;
       this.mouse.y = event.touches[0].clientY;
       for (let i = 0; i < this.pCount; i++) {
-        TweenMax.to(this.particles[i].position, 3, {
+        TweenMax.to(this.particles[i].position, 2, {
           ease: Expo.ease,
           x:
-            this.mouse.x * this.random(0.5, 1.5) +
+            this.mouse.x * this.position[0][i] +
             this.random(-100, 100) * this.distance[i] * 10,
           y:
-            this.mouse.y * this.random(0.5, 1.5) +
+            this.mouse.y * this.position[1][i] +
             this.random(-100, 100) * this.distance[i] * 10
         });
       }
