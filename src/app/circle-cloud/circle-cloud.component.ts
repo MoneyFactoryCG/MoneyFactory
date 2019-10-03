@@ -139,7 +139,7 @@ export class CircleCloudComponent implements OnInit, AfterViewInit, OnDestroy {
       this.mouse.x = event.touches[0].clientX;
       this.mouse.y = event.touches[0].clientY;
       this.block += 1;
-      if (this.block >= 7) {
+      if (this.block >= 1) {
         this.block = 0;
         for (let i = 0; i < this.pCount; i++) {
           TweenMax.to(this.particles[i].position, this.random(2, 5), {
