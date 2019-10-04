@@ -1,0 +1,354 @@
+.main-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  min-height: 800px;
+  padding: 0 60px;
+  position: relative;
+  overflow: hidden;
+  .content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    .rectangle {
+      opacity: 0;
+      height: 100%;
+      width: 600px;
+      display: flex;
+      flex-direction: column;
+      // justify-content: space-around;
+      align-items: flex-start;
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(6px);
+      position: relative;
+      .logo {
+      }
+      .h1 {
+        font-weight: 700;
+        font-size: 90px;
+        position: absolute;
+        bottom: 240px;
+        line-height: 120%;
+      }
+      .h2 {
+        font-size: 65px;
+        text-transform: uppercase;
+        font-weight: 400;
+        position: absolute;
+        bottom: 90px;
+        margin-left: 5px;
+        animation-name: glitch-anim-text;
+        animation-duration: 4s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+      }
+    }
+    .rectangle.show {
+      transition: 1s ease opacity;
+      opacity: 1;
+    }
+    .social-buttons {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      .viber {
+        margin-bottom: 30px;
+      }
+      .facebook {
+        margin-bottom: 30px;
+      }
+      .dots-line {
+        margin: 30px 0;
+        .dot {
+          display: block;
+          width: 6px;
+          height: 6px;
+          background: #009fff;
+          border-radius: 50%;
+        }
+        .dot:not(:last-child) {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+
+  app-circle-cloud {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+@media screen and (max-width: 1160px) {
+  .main-block {
+    min-height: 600px;
+    .content {
+      .rectangle {
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+        .logo {
+        }
+        .h1 {
+          font-size: 50px;
+          position: absolute;
+          bottom: 120px;
+          line-height: 120%;
+        }
+        .h2 {
+          font-size: 35px;
+          text-transform: uppercase;
+          font-weight: 400;
+          position: absolute;
+          bottom: 60px;
+          margin-left: 0px;
+          animation-name: glitch-anim-text;
+          animation-duration: 4s;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+        }
+      }
+      .rectangle.show {
+        transition: 1s ease opacity;
+        opacity: 1;
+      }
+      .social-buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        .viber {
+          margin-bottom: 30px;
+        }
+        .facebook {
+          margin-bottom: 30px;
+        }
+        .dots-line {
+          margin: 30px 0;
+          .dot {
+            display: block;
+            width: 6px;
+            height: 6px;
+            background: #009fff;
+            border-radius: 50%;
+          }
+          .dot:not(:last-child) {
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+
+    app-circle-cloud {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-height: 800px;
+    }
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .main-block {
+    min-height: 600px;
+    .content {
+      .rectangle {
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+        .logo {
+        }
+        .h1 {
+          font-size: 50px;
+          position: absolute;
+          bottom: 120px;
+          line-height: 120%;
+        }
+        .h2 {
+          font-size: 35px;
+          text-transform: uppercase;
+          font-weight: 400;
+          position: absolute;
+          bottom: 60px;
+          margin-left: 0px;
+          animation-name: glitch-anim-text;
+          animation-duration: 4s;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+        }
+      }
+      .rectangle.show {
+        transition: 1s ease opacity;
+        opacity: 1;
+      }
+      .social-buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        .viber {
+          margin-bottom: 30px;
+        }
+        .facebook {
+          margin-bottom: 30px;
+        }
+        .dots-line {
+          margin: 30px 0;
+          .dot {
+            display: block;
+            width: 6px;
+            height: 6px;
+            background: #009fff;
+            border-radius: 50%;
+          }
+          .dot:not(:last-child) {
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+
+    app-circle-cloud {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-height: 800px;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .main-block {
+    padding: 0 20px;
+    min-height: 400px;
+    .content {
+      .rectangle {
+        width: 60%;
+        min-width: 224px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        padding: 30px 10px;
+        background: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0);
+        .logo {
+          width: 164px;
+        }
+        .h1 {
+          font-size: 40px;
+          position: absolute;
+          bottom: 140px;
+          line-height: 120%;
+        }
+        .h2 {
+          font-size: 26px;
+          text-transform: uppercase;
+          font-weight: 400;
+          position: absolute;
+          bottom: 80px;
+          margin-left: 0px;
+          animation-name: glitch-anim-text;
+          animation-duration: 4s;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+        }
+      }
+      .social-buttons {
+        .s-btn,
+        .m-btn {
+          .icon {
+            width: 28px;
+            height: 28px;
+          }
+        }
+        .viber {
+          margin-bottom: 30px;
+        }
+        .facebook {
+          margin-bottom: 30px;
+        }
+        .dots-line {
+          margin: 30px 0;
+          .dot {
+            display: block;
+            width: 6px;
+            height: 6px;
+            background: #009fff;
+            border-radius: 50%;
+          }
+          @for $i from 1 to 7 {
+            .dot:nth-child(#{$i}) {
+              display: none;
+            }
+          }
+          .dot:not(:last-child) {
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+
+    app-circle-cloud {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-height: 800px;
+    }
+  }
+}
+
+@keyframes glitch-anim-text {
+  0% {
+    transform: translate3d(calc(-1 * 10px), 0, 0) scale3d(-1, -1, 1);
+    -webkit-clip-path: polygon(0 20%, 100% 20%, 100% 21%, 0 21%);
+    clip-path: polygon(0 20%, 100% 20%, 100% 21%, 0 21%);
+  }
+  2% {
+    -webkit-clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%);
+    clip-path: polygon(0 33%, 100% 33%, 100% 33%, 0 33%);
+  }
+  4% {
+    -webkit-clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%);
+    clip-path: polygon(0 44%, 100% 44%, 100% 44%, 0 44%);
+  }
+  5% {
+    -webkit-clip-path: polygon(0 50%, 100% 50%, 100% 20%, 0 20%);
+    clip-path: polygon(0 50%, 100% 50%, 100% 20%, 0 20%);
+  }
+  6% {
+    -webkit-clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%);
+    clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%);
+  }
+  7% {
+    -webkit-clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%);
+    clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%);
+  }
+  8% {
+    -webkit-clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%);
+    clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%);
+  }
+  9% {
+    -webkit-clip-path: polygon(0 70%, 100% 70%, 100% 80%, 0 80%);
+    clip-path: polygon(0 70%, 100% 70%, 100% 80%, 0 80%);
+  }
+  9.9% {
+    transform: translate3d(calc(-1 * 10px), 0, 0) scale3d(-1, -1, 1);
+  }
+  10%,
+  100% {
+    transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+}
