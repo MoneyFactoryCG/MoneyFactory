@@ -18,7 +18,7 @@
     .rectangle {
       opacity: 0;
       height: 100%;
-      width: 600px;
+      width: 540px;
       display: flex;
       flex-direction: column;
       // justify-content: space-around;
@@ -28,6 +28,7 @@
       backdrop-filter: blur(6px);
       position: relative;
       .logo {
+        width: 281px;
       }
       .h1 {
         font-weight: 700;
@@ -35,14 +36,16 @@
         position: absolute;
         bottom: 240px;
         line-height: 120%;
+        cursor: default;
       }
       .h2 {
-        font-size: 65px;
+        font-size: 57px;
         text-transform: uppercase;
         font-weight: 400;
         position: absolute;
         bottom: 90px;
         margin-left: 5px;
+        cursor: default;
         animation-name: glitch-anim-text;
         animation-duration: 4s;
         animation-timing-function: linear;
@@ -163,7 +166,7 @@
     min-height: 600px;
     .content {
       .rectangle {
-        width: 500px;
+        width: 350px;
         display: flex;
         flex-direction: column;
         .logo {
@@ -173,6 +176,7 @@
           position: absolute;
           bottom: 120px;
           line-height: 120%;
+          width: 400px;
         }
         .h2 {
           font-size: 35px;
