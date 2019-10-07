@@ -12,12 +12,9 @@ export class MainBlockComponent implements OnInit {
 
   ngOnInit() {
     $(".main-block .rectangle").addClass("show");
-
-    // setTimeout(() => {
     $(".preloader").css({
       opacity: "0",
       "pointer-events": "none"
     });
-    // }, 2000);
   }
 }
