@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /assets/*
+Host: moneyfactory.digital
+Sitemap: https://moneyfactory.digital/assets/sitemap.xml
