@@ -8,6 +8,10 @@
   color: #fff;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   height: 100%;
   width: 100%;
@@ -16,6 +20,7 @@ body {
 
 body {
   background: #000;
+  overflow: hidden;
 }
 
 .preloader {
