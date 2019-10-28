@@ -4,7 +4,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const Telegraf = require("telegraf");
 
-const bot = new Telegraf(process.env.BOT_TOKEN);
+const bot = new Telegraf("905553028:AAH3MRBKNmS8y3qpxFvOCkTeNExFDHL07xw");
 const router = express.Router();
 
 app.use(bodyParser.json());
