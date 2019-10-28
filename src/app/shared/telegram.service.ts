@@ -9,6 +9,8 @@ export class TelegramService {
   constructor(private http: HttpClient) {}
 
   sendMessage(phone: string) {
-    return this.http.post(environment + "/.netlify/functions/test", { phone });
+    return this.http.post(environment.host + "/.netlify/functions/test", {
+      phone
+    });
   }
 }
