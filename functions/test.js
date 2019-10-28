@@ -8,12 +8,12 @@ const bot = new Telegraf("905553028:AAH3MRBKNmS8y3qpxFvOCkTeNExFDHL07xw");
 const router = express.Router();
 
 app.use(bodyParser.json());
-router.post("/", (res, req) => {
+router.post("/", (req, res) => {
   bot.telegram.sendMessage(-361781942, req.body.phone);
-  res.status(200).json({ send: "ok" });
+  res.json({ send: "ok" });
 });
 
 app.use("/.netlify/functions/test", router);
 
-module.exports.handler = serverless(app);
 module.exports = app;
+module.exports.handler = serverless(app);
