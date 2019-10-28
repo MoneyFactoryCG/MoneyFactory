@@ -68,7 +68,7 @@ export class CircleCloudComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor() {}
 
   generateParticle() {
-    const particle = PIXI.Sprite.from("assets/Ellipse.png");
+    const particle = PIXI.Sprite.from("assets/Ellipse.svg");
     particle.interactive = true;
     particle.scale.set(this.random(0.1, 1));
     particle.position.set(

@@ -1,11 +1,14 @@
 <section class="main-block">
-  <div class="content">
+  <div class="content" (click)="closeAll()">
     <div class="rectangle">
       <img class="logo" src="assets/logo.svg" alt="Money Factory" />
       <h1 class="h1">
         Digital Marketing Revolution
       </h1>
-      <h2 class="h2">COMING SOON</h2>
+      <h2 *ngIf="!isTimer" class="h2" (click)="openModal('.first-mw')">
+        COMING SOON
+      </h2>
+      <app-timer *ngIf="isTimer" (destroyTimer)="stopTimer($event)"></app-timer>
     </div>
     <div class="social-buttons">
       <a class="m-btn viber" href="">
@@ -42,4 +45,106 @@
     </div>
   </div>
   <app-circle-cloud [el]="'.main-block'"></app-circle-cloud>
+  <div class="first-mw">
+    <span class="close-icon" (click)="closeModal('.first-mw')">
+      <svg
+        width="34"
+        height="34"
+        viewBox="0 0 34 34"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect
+          width="2.59107"
+          height="45.3437"
+          transform="matrix(0.704907 -0.7093 0.704907 0.7093 0.210938 1.83789)"
+          fill="white"
+        />
+        <rect
+          width="2.59107"
+          height="45.3437"
+          transform="matrix(-0.704907 -0.7093 -0.704907 0.7093 33.7896 1.83789)"
+          fill="white"
+        />
+      </svg>
+    </span>
+    <div class="content">
+      <h2 class="h2">
+        Надоело гонять шары?
+        <br />
+        Пора развивать свой бизнес!
+      </h2>
+      <h1 class="h1">
+        Будь в числе первых и получи скидку -50% на наши услуги:
+      </h1>
+      <div class="grid">
+        <p class="line">Сайт под ключ</p>
+        <p class="line">Настройка рекламы</p>
+        <p class="line">Продвижение в соцсетях</p>
+      </div>
+      <div class="btns">
+        <button class="contact">
+          <span class="wave"></span>
+          <p class="text" (click)="openModal('.second-mw')">Обсудить проект</p>
+        </button>
+        <button class="close" (click)="closeModal('.first-mw')">
+          <span class="wave"></span>
+          <p class="text">Гонять шары</p>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="second-mw">
+    <span class="close-icon" (click)="closeModal('.second-mw')">
+      <svg
+        width="34"
+        height="34"
+        viewBox="0 0 34 34"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect
+          width="2.59107"
+          height="45.3437"
+          transform="matrix(0.704907 -0.7093 0.704907 0.7093 0.210938 1.83789)"
+          fill="white"
+        />
+        <rect
+          width="2.59107"
+          height="45.3437"
+          transform="matrix(-0.704907 -0.7093 -0.704907 0.7093 33.7896 1.83789)"
+          fill="white"
+        />
+      </svg>
+    </span>
+    <div class="content">
+      <h1 class="h1">Обсудить проект</h1>
+      <p class="text">
+        Оставьте Ваш номер и мы свяжемся с Вами в течении 15 минут.
+      </p>
+      <form [formGroup]="form" (ngSubmit)="onSubmit($event)" class="order-form">
+        <input
+          formControlName="phone"
+          type="text"
+          (keyup)="onChange($event)"
+          name="phone"
+          class="phone"
+          placeholder="+00(000)000-00-00"
+          [prefix]="prefix"
+          [mask]="mask"
+        />
+        <!-- 
+          +380506515436 
+          +71236515436 
+        -->
+        <button
+          [ngClass]="form.invalid || !isSubmit ? 'order disabled' : 'order'"
+          type="submit"
+          [disabled]="form.invalid || !isSubmit"
+        >
+          <span class="wave"></span>Обсудить проект
+        </button>
+      </form>
+    </div>
+  </div>
 </section>

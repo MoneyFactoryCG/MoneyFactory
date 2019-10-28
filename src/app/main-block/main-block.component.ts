@@ -1,5 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-
+import { Component, OnInit, Renderer2, ChangeDetectorRef } from "@angular/core";
+import { FormGroup, Validators, FormControl } from "@angular/forms";
+import { CookieService } from "ngx-cookie-service";
+import { TelegramService } from "../shared/telegram.service";
 import * as $ from "jquery";
 
 @Component({
@@ -8,13 +10,117 @@ import * as $ from "jquery";
   styleUrls: ["./main-block.component.scss"]
 })
 export class MainBlockComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private r: Renderer2,
+    private cookieService: CookieService,
+    private ts: TelegramService,
+    private ref: ChangeDetectorRef
+  ) {}
+
+  isTimer = false;
+
+  form: FormGroup;
+  isSubmit = true;
+
+  maskArr = ["(000)000-00-00", ""];
+
+  prefixArr = ["+38", "+7", "+"];
+
+  mask = "";
+  prefix = "+";
+
+  phoneRegex = /^\d{1}\d{1}-\d{3}-\d{2}-\d{2}$/;
+
+  openModal(id: string) {
+    this.r.setStyle(
+      document.querySelector(".main-block").querySelector(id),
+      "visibility",
+      "visible"
+    );
+    setTimeout(() => {
+      this.r.setStyle(
+        document.querySelector(".main-block").querySelector(id),
+        "transform",
+        "translateY(0)"
+      );
+    }, 50);
+  }
+
+  closeModal(id: string) {
+    this.r.setStyle(
+      document.querySelector(".main-block").querySelector(id),
+      "transform",
+      "translateY(100%)"
+    );
+  }
+
+  closeAll() {
+    this.closeModal(".first-mw");
+    this.closeModal(".second-mw");
+  }
+
+  onChange(e) {
+    console.log(e);
+    if (this.form.get("phone").value === "+38") {
+      e.target.blur();
+      this.mask = this.maskArr[0];
+      this.prefix = this.prefixArr[0];
+      e.target.focus();
+    } else if (this.form.get("phone").value === "+7") {
+      e.target.blur();
+      this.mask = this.maskArr[0];
+      this.prefix = this.prefixArr[1];
+      e.target.focus();
+    } else if (this.form.get("phone").value === "") {
+      e.target.blur();
+      this.mask = "";
+      this.prefix = "+";
+      this.ref.detectChanges();
+      e.target.focus();
+    }
+  }
+
+  order() {
+    this.ts.sendMessage(this.form.get("phone").value).subscribe(
+      res => {
+        console.log(res);
+        this.isSubmit = true;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  startTimer() {
+    this.isTimer = true;
+    this.cookieService.set("time", "" + 15 * 60);
+  }
+
+  stopTimer(event) {
+    this.isTimer = event;
+  }
+
+  onSubmit(e) {
+    this.isSubmit = false;
+    this.order();
+    this.closeModal(".first-mw");
+    this.closeModal(".second-mw");
+    this.startTimer();
+  }
 
   ngOnInit() {
+    this.form = new FormGroup({
+      phone: new FormControl(null, [Validators.required])
+    });
+
     $(".main-block .rectangle").addClass("show");
     $(".preloader").css({
       opacity: "0",
       "pointer-events": "none"
     });
+    if (+this.cookieService.get("time") > 0) {
+      this.isTimer = true;
+    }
   }
 }
