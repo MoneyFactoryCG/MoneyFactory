@@ -11,7 +11,7 @@ import { MainBlockComponent } from "./main-block/main-block.component";
 import { TimerComponent } from "./timer/timer.component";
 import { CookieService } from "ngx-cookie-service";
 
-export let options: Partial<IConfig> | (() => Partial<IConfig>);
+// export const options: Partial<IConfig> | (() => Partial<IConfig>);
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    NgxMaskModule.forRoot(options)
+    NgxMaskModule.forRoot()
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

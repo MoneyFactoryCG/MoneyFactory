@@ -10,3 +10,29 @@
     color: #009fff;
   }
 }
+
+@media screen and (max-width: 1366px) {
+  .timer {
+    .hours,
+    .minutes,
+    .seconds {
+      font-size: 60px;
+    }
+    .divider {
+      font-size: 60px;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .timer {
+    .hours,
+    .minutes,
+    .seconds {
+      font-size: 40px;
+    }
+    .divider {
+      font-size: 40px;
+    }
+  }
+}
