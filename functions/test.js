@@ -9,7 +9,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 app.use(bodyParser);
 app.post("/send", (res, req) => {
   bot.sendMessage(-361781942, req.body.phone);
-  console.log("ok");
+  req.status(200).json({ send: "ok" });
 });
 
 module.exports.handler = serverless(app);
