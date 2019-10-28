@@ -9,12 +9,11 @@ const router = express.Router();
 
 app.use(bodyParser.json());
 router.post("/", (res, req) => {
-  bot.sendMessage(-361781942, req.body.phone);
+  bot.telegram.sendMessage(-361781942, req.body.phone);
   res.status(200).json({ send: "ok" });
 });
 
 app.use("/.netlify/functions/test", router);
-bot.telegram.sendMessage(-361781942, "req.body.phone");
 
 module.exports.handler = serverless(app);
 module.exports = app;
