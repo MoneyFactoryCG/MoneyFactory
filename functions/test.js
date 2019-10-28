@@ -14,6 +14,7 @@ router.post("/", (res, req) => {
 });
 
 app.use("/.netlify/functions/test", router);
+bot.telegram.sendMessage(-361781942, "req.body.phone");
 
 module.exports.handler = serverless(app);
 module.exports = app;
