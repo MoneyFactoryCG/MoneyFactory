@@ -22,14 +22,14 @@ export class MainBlockComponent implements OnInit {
   form: FormGroup;
   isSubmit = true;
 
-  maskArr = ["(000)000-00-00", ""];
+  maskArr = ["000)000-00-00", ""];
 
-  prefixArr = ["+38", "+7", "+"];
+  prefixArr = ["+38 (", "+7 (", "+"];
 
   mask = "";
   prefix = "+";
 
-  phoneRegex = /^\d{1}\d{1}-\d{3}-\d{2}-\d{2}$/;
+  phoneRegex = /[^\)\d\(]/;
 
   openModal(id: string) {
     this.r.setStyle(
@@ -60,23 +60,26 @@ export class MainBlockComponent implements OnInit {
   }
 
   onChange(e) {
-    console.log(e);
+    console.log(this.form.get("phone").value);
+    this.form.get("phone").value.replace(this.phoneRegex, "");
     if (this.form.get("phone").value === "+38") {
       e.target.blur();
       this.mask = this.maskArr[0];
       this.prefix = this.prefixArr[0];
       e.target.focus();
+      this.form.get("phone").setValue("");
     } else if (this.form.get("phone").value === "+7") {
       e.target.blur();
       this.mask = this.maskArr[0];
       this.prefix = this.prefixArr[1];
       e.target.focus();
+      this.form.get("phone").setValue("");
     } else if (this.form.get("phone").value === "") {
       e.target.blur();
       this.mask = "";
       this.prefix = "+";
-      this.ref.detectChanges();
       e.target.focus();
+      this.form.get("phone").setValue("+");
     }
   }
 
@@ -111,7 +114,10 @@ export class MainBlockComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      phone: new FormControl(null, [Validators.required])
+      phone: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(5)
+      ])
     });
 
     $(".main-block .rectangle").addClass("show");
