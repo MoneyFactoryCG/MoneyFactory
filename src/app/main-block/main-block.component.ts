@@ -29,7 +29,7 @@ export class MainBlockComponent implements OnInit {
   mask = "";
   prefix = "+";
 
-  phoneRegex = /[^\)\d\(]/;
+  phoneRegex = /[^\)\d\(\+]/;
 
   openModal(id: string) {
     this.r.setStyle(
@@ -61,7 +61,9 @@ export class MainBlockComponent implements OnInit {
 
   onChange(e) {
     console.log(this.form.get("phone").value);
-    this.form.get("phone").value.replace(this.phoneRegex, "");
+    this.form
+      .get("phone")
+      .setValue(this.form.get("phone").value.replace(this.phoneRegex, ""));
     if (this.form.get("phone").value === "+38") {
       e.target.blur();
       this.mask = this.maskArr[0];
