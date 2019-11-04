@@ -127,6 +127,9 @@
       right: 20px;
       top: 20px;
       cursor: pointer;
+      svg {
+        pointer-events: none;
+      }
     }
     .content {
       display: flex;

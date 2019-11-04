@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ChangeDetectorRef } from "@angular/core";
+import { Component, OnInit, Renderer2 } from "@angular/core";
 import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { CookieService } from "ngx-cookie-service";
 import { TelegramService } from "../shared/telegram.service";
@@ -13,8 +13,7 @@ export class MainBlockComponent implements OnInit {
   constructor(
     private r: Renderer2,
     private cookieService: CookieService,
-    private ts: TelegramService,
-    private ref: ChangeDetectorRef
+    private ts: TelegramService
   ) {}
 
   isTimer = false;
@@ -23,8 +22,8 @@ export class MainBlockComponent implements OnInit {
   isSubmit = true;
 
   maskArr = ["000)000-00-00", ""];
-
   prefixArr = ["+38 (", "+7 (", "+"];
+  maxLength = 15;
 
   mask = "";
   prefix = "+";
@@ -46,6 +45,30 @@ export class MainBlockComponent implements OnInit {
     }, 50);
   }
 
+  openSecondModal() {
+    this.openModal(".second-mw");
+    this.r.setStyle(
+      document
+        .querySelector(".main-block")
+        .querySelector(".first-mw")
+        .querySelector(".close-icon"),
+      "display",
+      "none"
+    );
+  }
+
+  openFirstModal() {
+    this.openModal(".first-mw");
+    this.r.setStyle(
+      document
+        .querySelector(".main-block")
+        .querySelector(".first-mw")
+        .querySelector(".close-icon"),
+      "display",
+      "block"
+    );
+  }
+
   closeModal(id: string) {
     this.r.setStyle(
       document.querySelector(".main-block").querySelector(id),
@@ -60,28 +83,36 @@ export class MainBlockComponent implements OnInit {
   }
 
   onChange(e) {
-    console.log(this.form.get("phone").value);
     this.form
       .get("phone")
       .setValue(this.form.get("phone").value.replace(this.phoneRegex, ""));
     if (this.form.get("phone").value === "+38") {
+      this.maxLength = 18;
       e.target.blur();
       this.mask = this.maskArr[0];
       this.prefix = this.prefixArr[0];
       e.target.focus();
       this.form.get("phone").setValue("");
     } else if (this.form.get("phone").value === "+7") {
+      this.maxLength = 18;
       e.target.blur();
       this.mask = this.maskArr[0];
       this.prefix = this.prefixArr[1];
       e.target.focus();
       this.form.get("phone").setValue("");
     } else if (this.form.get("phone").value === "") {
+      console.log("-");
+      this.maxLength = 15;
       e.target.blur();
       this.mask = "";
       this.prefix = "+";
       e.target.focus();
       this.form.get("phone").setValue("+");
+    } else if (this.form.get("phone").value === "+") {
+      console.log("+");
+      this.maxLength = 15;
+      e.target.blur();
+      e.target.focus();
     }
   }
 
@@ -118,7 +149,8 @@ export class MainBlockComponent implements OnInit {
     this.form = new FormGroup({
       phone: new FormControl(null, [
         Validators.required,
-        Validators.minLength(5)
+        Validators.minLength(5),
+        Validators.maxLength(18)
       ])
     });
 

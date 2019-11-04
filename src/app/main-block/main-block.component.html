@@ -5,7 +5,7 @@
       <h1 class="h1">
         Digital Marketing Revolution
       </h1>
-      <h2 *ngIf="!isTimer" class="h2" (click)="openModal('.first-mw')">
+      <h2 *ngIf="!isTimer" class="h2" (click)="openFirstModal()">
         COMING SOON
       </h2>
       <app-timer *ngIf="isTimer" (destroyTimer)="stopTimer($event)"></app-timer>
@@ -46,7 +46,7 @@
   </div>
   <app-circle-cloud [el]="'.main-block'"></app-circle-cloud>
   <div class="first-mw">
-    <span class="close-icon" (click)="closeModal('.first-mw')">
+    <span class="close-icon" (click)="closeAll()">
       <svg
         width="34"
         height="34"
@@ -85,7 +85,7 @@
       <div class="btns">
         <button class="contact">
           <span class="wave"></span>
-          <p class="text" (click)="openModal('.second-mw')">Обсудить проект</p>
+          <p class="text" (click)="openSecondModal()">Обсудить проект</p>
         </button>
         <button class="close" (click)="closeModal('.first-mw')">
           <span class="wave"></span>
@@ -95,7 +95,7 @@
     </div>
   </div>
   <div class="second-mw">
-    <span class="close-icon" (click)="closeModal('.second-mw')">
+    <span class="close-icon" (click)="closeAll()">
       <svg
         width="34"
         height="34"
@@ -132,6 +132,7 @@
           placeholder="+00(000)000-00-00"
           [prefix]="prefix"
           [mask]="mask"
+          [maxlength]="maxLength"
         />
         <!-- 
           +380506515436 
