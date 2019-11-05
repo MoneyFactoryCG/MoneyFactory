@@ -114,19 +114,20 @@ export class MainBlockComponent implements OnInit {
       e.target.blur();
       e.target.focus();
     }
-    console.log(this.valuePrefix + this.form.get("phone").value);
   }
 
   order() {
-    this.ts.sendMessage(this.form.get("phone").value).subscribe(
-      res => {
-        console.log(res);
-        this.isSubmit = true;
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    this.ts
+      .sendMessage(this.valuePrefix + this.form.get("phone").value)
+      .subscribe(
+        res => {
+          console.log(res);
+          this.isSubmit = true;
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   startTimer() {
