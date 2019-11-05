@@ -22,9 +22,10 @@ export class MainBlockComponent implements OnInit {
   isSubmit = true;
 
   maskArr = ["000)000-00-00", ""];
-  prefixArr = ["+38 (", "+7 (", "+"];
-  maxLength = 15;
+  prefixArr = ["+38(", "+7(", "+"];
+  valuePrefix = "";
 
+  maxLength = 15;
   mask = "";
   prefix = "+";
 
@@ -88,32 +89,32 @@ export class MainBlockComponent implements OnInit {
       .setValue(this.form.get("phone").value.replace(this.phoneRegex, ""));
     if (this.form.get("phone").value === "+38") {
       this.maxLength = 18;
-      e.target.blur();
+      this.form.get("phone").setValue("");
       this.mask = this.maskArr[0];
       this.prefix = this.prefixArr[0];
-      e.target.focus();
-      this.form.get("phone").setValue("");
+      this.valuePrefix = "+38";
+      this.form.get("phone").updateValueAndValidity();
     } else if (this.form.get("phone").value === "+7") {
       this.maxLength = 18;
-      e.target.blur();
+      this.form.get("phone").setValue("");
       this.mask = this.maskArr[0];
       this.prefix = this.prefixArr[1];
-      e.target.focus();
-      this.form.get("phone").setValue("");
+      this.valuePrefix = "+7";
+      this.form.get("phone").updateValueAndValidity();
     } else if (this.form.get("phone").value === "") {
-      console.log("-");
       this.maxLength = 15;
-      e.target.blur();
       this.mask = "";
       this.prefix = "+";
-      e.target.focus();
+      this.valuePrefix = "";
       this.form.get("phone").setValue("+");
+      this.form.get("phone").updateValueAndValidity();
     } else if (this.form.get("phone").value === "+") {
-      console.log("+");
       this.maxLength = 15;
+      this.valuePrefix = "";
       e.target.blur();
       e.target.focus();
     }
+    console.log(this.valuePrefix + this.form.get("phone").value);
   }
 
   order() {
