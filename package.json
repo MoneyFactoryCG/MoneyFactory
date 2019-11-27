@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "prod": "concurrently \"pm2 restart test.js\" \"/etc/init.d/nginx restart\"",
+    "prod": "concurrently \"pm2 restart ecosystem.config.js\" \"/etc/init.d/nginx restart\"",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
