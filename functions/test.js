@@ -1,5 +1,6 @@
 const express = require("express");
 const serverless = require("serverless-http");
+const port = 2000;
 const app = express();
 const bodyParser = require("body-parser");
 const Telegraf = require("telegraf");
@@ -18,7 +19,6 @@ router.post("/", (req, res) => {
   res.json({ send: "ok" });
 });
 
-app.use("/.netlify/functions/test", router);
+app.use("/api", router);
 
-module.exports = app;
-module.exports.handler = serverless(app);
+app.listen(port, () => console.log(`Server has been started on ${port}`));
